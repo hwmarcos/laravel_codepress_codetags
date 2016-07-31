@@ -2,6 +2,7 @@
 
 namespace CodePress\CodeTag\Tests\Models;
 
+use \CodePress\CodePosts\Models\Post;
 use CodePress\CodeTag\Models\Tag;
 use CodePress\CodeTag\tests\AbstractTestCase;
 use Illuminate\Validation\Validator;
@@ -39,6 +40,13 @@ class TagTest extends AbstractTestCase {
 
         $this->assertEquals('Tag Test', $child->name);
         $this->assertEquals('Parent Test', $child->parent->name);
+    }
+
+    public function test_can_add_posts_to_tags()
+    {
+
+        Post::create(['title'=>'teste post', 'content'=>'conteudo post']);
+
     }
 
 }
