@@ -45,7 +45,27 @@ class TagTest extends AbstractTestCase {
     public function test_can_add_posts_to_tags()
     {
 
-        Post::create(['title'=>'teste post', 'content'=>'conteudo post']);
+        $tag = Tag::create([
+            'name' => 'Tag Teste',
+            'acive' => true
+        ]);
+
+        $post1 = Post::create(['title'=>'teste post 1', 'content'=>'conteudo post1']);
+        $post2 = Post::create(['title'=>'teste post 2', 'content'=>'conteudo post2']);
+
+        $post1->tags()->save($tag);
+        $post2->tags()->save($tag);
+
+        $this->assertCount(1, Tag::all());
+        $this->assertEquals('Tag Teste', $post1->tags->first()->name);
+        $this->assertEquals('Tag Teste', $post2->tags->first()->name);
+
+        $posts = Tag::find(1)->posts;
+
+        $this->assertCount(2, $posts);
+
+        $this->assertEquals('teste post 1', $posts[0]->title);
+        $this->assertEquals('teste post 2', $posts[1]->title);
 
     }
 

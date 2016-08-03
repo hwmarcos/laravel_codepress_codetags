@@ -2,6 +2,7 @@
 
 namespace CodePress\CodeTag\Models;
 
+use CodePress\CodePosts\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
@@ -19,10 +20,10 @@ class Tag extends Model
         return $this->validator;    
     }
 
-    public function taggable()
+    /*public function taggable()
     {
         return $this->morphTo();
-    }
+    }*/
 
     public function posts()
     {
